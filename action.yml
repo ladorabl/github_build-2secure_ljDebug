@@ -79,7 +79,7 @@ runs:
     - name: Cloning actions
       uses: actions/checkout@master
       with:
-        repository: nirappdome/appdome_android_action
+        repository: Appdome/github_build-2secure
         ref: refs/heads/main
         path: actions
     - name: permissions
