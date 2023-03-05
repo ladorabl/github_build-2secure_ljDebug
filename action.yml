@@ -1,6 +1,6 @@
 # TODO
 name: Appdome buid-2secure
-description: TODO
+description: Appdome Build-2secure in GitHub
 branding:
   icon: 'bluetooth'
   color: 'blue'
@@ -95,4 +95,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: workflow-artifacts
-        path: ./output/ # path to output folder
+        path: ./output/
