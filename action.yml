@@ -14,31 +14,31 @@ inputs:
     default: '!'
     required: true
   FUSION_SET_ID:
-    description: "Appdome Fusion Set Id"
+    description: "Appdome FusionSetId iOS/Android"
     default: '!'
     required: true
   SIGN_OPTIONS:
     type: choice
-    description: Android Sign Options
+    description: "iOS/Android Signin option"
     options: 
     - AUTO_SIGNING
     - PRIVATE_SIGNING
     - AUTO_DEV_SIGNING
     required: true
   KEYSTORE_FILE:
-    description: 'Keystore file'
+    description: 'Keystore sign file'
     default: '!'
     required: false
   MOBILE_PROVISION_PROFILE_FILE:
-    description: ''
+    description: 'iOS sign file'
     default: '!'
     required: false
   ENTITLEMENTS_FILE:
-    description: ''
+    description: 'iOS sign file'
     default: '!'
     required: false
   KEYSTORE_PASSWORD:
-    description: ''
+    description: 'Keystore password sign file'
     default: '!'
     required: false
   KEYSTORE_ALIAS:
@@ -59,7 +59,7 @@ inputs:
     default: false
     required: false
   TEAM-ID:
-    description: 'Insert your team-id. This line is optional and may be removed when working on a personal workspace.'
+    description: 'your team-id'
     default: '!'
     required: false
 
