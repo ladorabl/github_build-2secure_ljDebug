@@ -1,1 +1,76 @@
+name: Appdome build-2secure
+description: Appdome Build-2secure in GitHub
+branding:
+  icon: 'bluetooth'
+  color: 'blue'
 
+inputs:
+  APPDOME_API_TOKEN:
+    description: 'Appdome API key'
+    default: '!'
+    required: true
+  APP_FILE:
+    description: 'APK file'
+    default: '!'
+    required: true
+  FUSION_SET_ID:
+    description: "Appdome FusionSetId iOS/Android"
+    default: '!'
+    required: true
+  SIGN_OPTIONS:
+    type: choice
+    description: "iOS/Android Signin option"
+    options: 
+    - AUTO_SIGNING
+    - PRIVATE_SIGNING
+    - AUTO_DEV_SIGNING
+    required: true
+  KEYSTORE_FILE:
+    description: 'Keystore sign file'
+    default: '!'
+    required: false
+  MOBILE_PROVISION_PROFILE_FILE:
+    description: 'iOS sign file'
+    default: '!'
+    required: false
+  ENTITLEMENTS_FILE:
+    description: 'iOS sign file'
+    default: '!'
+    required: false
+  KEYSTORE_PASSWORD:
+    description: 'Keystore password sign file'
+    default: '!'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cloning appdome-api-python github repository
+      uses: actions/checkout@master
+      with:
+        repository: Appdome/appdome-api-python
+        ref: refs/heads/main
+        path: appdome
+    - name: Install requirements
+      run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
+      shell: bash   
+    - name: Cloning actions
+      uses: actions/checkout@master
+      with:
+        repository: Appdome/github_build-2secure
+        ref: refs/heads/main
+        path: actions
+    - name: permissions
+      run: chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
+      shell: bash
+    - name: Run download action files
+      run: python3 ./actions/actions/files_manager.py ${{ inputs.APP_FILE }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
+      shell: bash
+    - name: Run appdome bash action files
+      run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.SIGN_OPTIONS }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.TEAM-ID }} ${{ inputs.GOOGLE-PLAY-SIGNING }} ${{ inputs.SIGN_FINGERPRINT }} 
+      shell: bash
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: workflow-artifacts
+        path: ./output/
