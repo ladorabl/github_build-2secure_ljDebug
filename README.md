@@ -1,6 +1,9 @@
 # Appdome Android Fuse&Sign action
 
-An action for fuse and sign you android vanilla application with Appdome.
+Actions are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools.
+
+Now you can easily secure and customize your mobile apps on GitHub using the Appdome GitHub Actions. No coding or technical expertise is required. Automate the process of adding security features such as encryption, biometric authentication, and more to your mobile apps. Additionally, sign your app with your own enterprise certificate for added flexibility and control. Get the flexibility and control you need to secure and customize your mobile apps with the Appdome GitHub action.
+
 
 # Usage
 
