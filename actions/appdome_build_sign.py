@@ -25,7 +25,7 @@ def parse_args():
                         help="keystore key pass", default="None")
     parser.add_argument("-team_id", dest='team_id', required=False,
                         help="team id", default="None")
-    parser.add_argument("-google-play-signing", dest='google-play-signing', required=False,
+    parser.add_argument("-google-play-signing", dest='google_play_signing', required=False,
                         help="google play signing", default="false")
     parser.add_argument("-signing_fingerprint", dest='signing_fingerprint', required=False,
                         help="signing_fingerprint", default="None")
