@@ -61,7 +61,7 @@ def main(argv):
         copy_files(keystore, f"./files/cert.p12") if ios_flag else copy_files(keystore, f"./files/cert.keystore")
     elif is_base64(keystore):
         decode_base64(keystore, f"./files/cert.p12") if ios_flag else decode_base64(keystore, f"./files/cert.keystore")
-    elif keystore != '!':
+    elif keystore != '':
         print(f"Error couldn't compose {keystore}")
         exit(1)
 
