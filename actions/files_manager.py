@@ -1,11 +1,23 @@
-import sys
+import argparse
 import os
 
 
-# app_file = argv[0]
-# keystore = argv[1]
-# provision_profiles = argv[2]
-# entitlements = argv[3]
+def parse_args():
+    """
+    Command line arguments
+    :return: args parser
+    """
+    parser = argparse.ArgumentParser("Appdome Build-2secure args")
+    parser.add_argument("-a", dest='app_file', required=True,
+                        help='None-protected application file')
+    parser.add_argument("-k", dest='keystore', required=False,
+                        help='Keystore file', default=None)
+    parser.add_argument("-pp", dest='provision_profiles', required=False,
+                        help="provision_profiles", default=None)
+    parser.add_argument("-e", dest='entitlements', required=False,
+                        help="entitlements", default=None)
+    return parser.parse_args()
+
 
 def is_base64(s):
     import base64
@@ -37,11 +49,14 @@ def copy_files(src_file, dest_file):
     shutil.copyfile(src_file, dest_file)
 
 
-def main(argv):
-    app_file = argv[0]
-    keystore = argv[1]
-    provision_profiles = argv[2]
-    entitlements = argv[3]
+args = parse_args()
+
+
+def main():
+    app_file = args.app_file
+    keystore = args.keystore
+    provision_profiles = args.provision_profiles
+    entitlements = args.entitlements
 
     ios_flag = True if app_file.endswith('.ipa') else False
     if not os.path.isdir("./files"):
@@ -55,17 +70,18 @@ def main(argv):
         print(f"Error couldn't compose {app_file}")
         exit(1)
 
-    if keystore.startswith('htt'):
-        download_file(keystore, f"./files/cert.p12") if ios_flag else download_file(keystore, f"./files/cert.keystore")
-    elif os.path.exists(keystore):
-        copy_files(keystore, f"./files/cert.p12") if ios_flag else copy_files(keystore, f"./files/cert.keystore")
-    elif is_base64(keystore):
-        decode_base64(keystore, f"./files/cert.p12") if ios_flag else decode_base64(keystore, f"./files/cert.keystore")
-    elif keystore != '!':
-        print(f"Error couldn't compose {keystore}")
-        exit(1)
+    if keystore:
+        if keystore.startswith('htt'):
+            download_file(keystore, f"./files/cert.p12") if ios_flag else download_file(keystore, f"./files/cert.keystore")
+        elif os.path.exists(keystore):
+            copy_files(keystore, f"./files/cert.p12") if ios_flag else copy_files(keystore, f"./files/cert.keystore")
+        elif is_base64(keystore):
+            decode_base64(keystore, f"./files/cert.p12") if ios_flag else decode_base64(keystore, f"./files/cert.keystore")
+        else:
+            print(f"Error couldn't compose {keystore}")
+            exit(1)
 
-    if provision_profiles != '!':
+    if provision_profiles:
         if not os.path.exists("./files/provision_profiles"):
             os.mkdir("./files/provision_profiles")
         if is_base64(provision_profiles):
@@ -80,7 +96,7 @@ def main(argv):
             print(f"Error couldn't compose {provision_profiles}")
             exit(1)
 
-    if entitlements != '!':
+    if entitlements:
         if not os.path.exists("./files/entitlements"):
             os.mkdir("./files/entitlements")
         if is_base64(entitlements):
@@ -97,4 +113,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
