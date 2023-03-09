@@ -46,6 +46,7 @@ def main():
     fusion_set = args.fusion_set
     keystore_pass = args.keystore_pass
     app_file = glob.glob('./files/vanilla.*')
+    print(f"!!!{app_file}!!!")
     app_extension = app_file[0][-4:]
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
