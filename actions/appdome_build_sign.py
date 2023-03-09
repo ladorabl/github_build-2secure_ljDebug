@@ -18,17 +18,17 @@ def parse_args():
     parser.add_argument("-fs", dest='fusion_set', required=True,
                         help="Appdome fusion set")
     parser.add_argument("-kp", dest='keystore_pass', required=False,
-                        help="keystore password", default=None)
+                        help="keystore password", default="None")
     parser.add_argument("-ka", dest='keystore_alias', required=False,
-                        help="keystore alias", default=None)
+                        help="keystore alias", default="None")
     parser.add_argument("-kkp", dest='keystore_key_pass', required=False,
-                        help="keystore key pass", default=None)
+                        help="keystore key pass", default="None")
     parser.add_argument("-team_id", dest='team_id', required=False,
-                        help="team id", default=None)
+                        help="team id", default="None")
     parser.add_argument("-google-play-signing", dest='google-play-signing', required=False,
                         help="google play signing", default="false")
     parser.add_argument("-signing_fingerprint", dest='signing_fingerprint', required=False,
-                        help="signing_fingerprint", default=None)
+                        help="signing_fingerprint", default="None")
     return parser.parse_args()
 
 
@@ -48,14 +48,14 @@ def main():
     app_file = glob.glob('./files/vanilla.*')
     app_extension = app_file[0][-4:]
     keystore_file = glob.glob('./files/cert.*')
-    team_id = f"--team_id {args.team_id}" if args.team_id != " " else ""
+    team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
     entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
         if os.path.exists("./files/entitlements") else ""
     if sign_option == 'AUTO_SIGNING':
-        keystore_alias = f"--keystore_alias {args.keystore_alias}" if args.keystore_alias != " " else ""
-        keystore_key_pass = f"--key_pass {args.keystore_key_pass}" if args.keystore_key_pass != " " else ""
+        keystore_alias = f"--keystore_alias {args.keystore_alias}" if args.keystore_alias != "None" else ""
+        keystore_key_pass = f"--key_pass {args.keystore_key_pass}" if args.keystore_key_pass != "None" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file[0]} " \
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
@@ -67,7 +67,7 @@ def main():
 
     elif sign_option == 'PRIVATE_SIGNING':
         google_play_signing = f"--google_play_signing" if args.google_play_signing != "false" else ""
-        signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != " " else ""
+        signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != "None" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file[0]} --private_signing -fs {fusion_set} {team_id} " \
@@ -78,7 +78,7 @@ def main():
 
     elif sign_option == 'AUTO_DEV_SIGNING':
         google_play_signing = f"--google_play_signing" if args.google_play_signing != "false" else ""
-        signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != " " else ""
+        signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != "None" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
