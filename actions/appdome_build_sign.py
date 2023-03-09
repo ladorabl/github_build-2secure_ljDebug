@@ -26,14 +26,14 @@ def main(argv):
     app_file = glob.glob('./files/non_protected.*')
     app_extension = app_file[0][-4:]
     keystore_file = glob.glob('./files/cert.*')
-    team_id = f"--team_id {argv[6]}" if argv[6] != "!" else ""
+    team_id = f"--team_id {argv[6]}" if argv[6] != "" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
     entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
         if os.path.exists("./files/entitlements") else ""
     if sign_option == 'AUTO_SIGNING':
-        keystore_alias = f"--keystore_alias {argv[4]}" if argv[4] != "!" else ""
-        keystore_key_pass = f"--key_pass {argv[5]}" if argv[5] != "!" else ""
+        keystore_alias = f"--keystore_alias {argv[4]}" if argv[4] != "" else ""
+        keystore_key_pass = f"--key_pass {argv[5]}" if argv[5] != "" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file[0]} " \
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
@@ -45,7 +45,7 @@ def main(argv):
 
     elif sign_option == 'PRIVATE_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] != "false" else ""
-        signing_fingerprint = f"--signing_fingerprint {argv[8]}" if argv[8] != "!" else ""
+        signing_fingerprint = f"--signing_fingerprint {argv[8]}" if argv[8] != "" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file[0]} --private_signing -fs {fusion_set} {team_id} " \
@@ -56,7 +56,7 @@ def main(argv):
 
     elif sign_option == 'AUTO_DEV_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] else ""
-        signing_fingerprint = f"--signing_fingerprint {argv[8]}" if argv[8] != "!" else ""
+        signing_fingerprint = f"--signing_fingerprint {argv[8]}" if argv[8] != "" else ""
         
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
