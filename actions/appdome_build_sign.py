@@ -45,8 +45,10 @@ def main():
     appdome_api_key = args.appdome_api_key
     fusion_set = args.fusion_set
     keystore_pass = args.keystore_pass
-    app_file = glob.glob('./files/vanilla.*')
-    print(f"!!!{app_file}!!!")
+    app_file = glob.glob('./files/non_protected.*')
+    if len(app_file) == 0:
+        print("Couldn't locate non_protected app file on ./files/non_protected.*")
+        exit(1)
     app_extension = app_file[0][-4:]
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
