@@ -61,11 +61,11 @@ def main(argv):
         copy_files(keystore, f"./files/cert.p12") if ios_flag else copy_files(keystore, f"./files/cert.keystore")
     elif is_base64(keystore):
         decode_base64(keystore, f"./files/cert.p12") if ios_flag else decode_base64(keystore, f"./files/cert.keystore")
-    elif keystore != '':
+    elif keystore != '!':
         print(f"Error couldn't compose {keystore}")
         exit(1)
 
-    if provision_profiles != '':
+    if provision_profiles != '!':
         if not os.path.exists("./files/provision_profiles"):
             os.mkdir("./files/provision_profiles")
         if is_base64(provision_profiles):
@@ -80,7 +80,7 @@ def main(argv):
             print(f"Error couldn't compose {provision_profiles}")
             exit(1)
 
-    if entitlements != '':
+    if entitlements != '!':
         if not os.path.exists("./files/entitlements"):
             os.mkdir("./files/entitlements")
         if is_base64(entitlements):
