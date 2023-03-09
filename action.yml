@@ -7,15 +7,15 @@ branding:
 inputs:
   APPDOME_API_TOKEN:
     description: 'Appdome API key'
-    default: '!'
+    default: ''
     required: true
   APP_FILE:
     description: 'APK file'
-    default: '!'
+    default: ''
     required: true
   FUSION_SET_ID:
     description: "Appdome FusionSetId iOS/Android"
-    default: '!'
+    default: ''
     required: true
   SIGN_OPTIONS:
     type: choice
@@ -27,31 +27,31 @@ inputs:
     required: true
   KEYSTORE_FILE:
     description: 'Keystore sign file'
-    default: '!'
+    default: ''
     required: false
   MOBILE_PROVISION_PROFILE_FILE:
     description: 'iOS sign file'
-    default: '!'
+    default: ''
     required: false
   ENTITLEMENTS_FILE:
     description: 'iOS sign file'
-    default: '!'
+    default: ''
     required: false
   KEYSTORE_PASSWORD:
     description: 'Keystore password sign file'
-    default: '!'
+    default: ''
     required: false
   KEYSTORE_ALIAS:
     description: 'keystore alias'
-    default: '!'
+    default: ''
     required: false
   KEYSTORE_KEY_PASSWORD:
     description: 'keystore key password'
-    default: '!'
+    default: ''
     required: false
   SIGN_FINGERPRINT:
     description: 'signing sha1 fingerprint'
-    default: '!'
+    default: ''
     required: false
   GOOGLE-PLAY-SIGNING:
     description: 'Google Play App Signing program'
@@ -60,7 +60,7 @@ inputs:
     required: false
   TEAM-ID:
     description: 'your team-id'
-    default: '!'
+    default: ''
     required: false
 
 runs:
