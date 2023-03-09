@@ -70,7 +70,7 @@ def main():
         print(f"Error couldn't compose {app_file}")
         exit(1)
 
-    if keystore:
+    if keystore != " ":
         if keystore.startswith('htt'):
             download_file(keystore, f"./files/cert.p12") if ios_flag else download_file(keystore, f"./files/cert.keystore")
         elif os.path.exists(keystore):
@@ -81,7 +81,7 @@ def main():
             print(f"Error couldn't compose {keystore}")
             exit(1)
 
-    if provision_profiles:
+    if provision_profiles != " ":
         if not os.path.exists("./files/provision_profiles"):
             os.mkdir("./files/provision_profiles")
         if is_base64(provision_profiles):
@@ -96,7 +96,7 @@ def main():
             print(f"Error couldn't compose {provision_profiles}")
             exit(1)
 
-    if entitlements:
+    if entitlements != " ":
         if not os.path.exists("./files/entitlements"):
             os.mkdir("./files/entitlements")
         if is_base64(entitlements):
