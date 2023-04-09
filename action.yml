@@ -21,7 +21,7 @@ inputs:
     type: choice
     description: "iOS/Android Signin option"
     options: 
-    - AUTO_SIGNING
+    - SIGN_ON_APPDOME
     - PRIVATE_SIGNING
     - AUTO_DEV_SIGNING
     required: true
