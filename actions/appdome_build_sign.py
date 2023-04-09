@@ -56,7 +56,7 @@ def main():
         if os.path.exists("./files/provision_profiles") else ""
     entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
         if os.path.exists("./files/entitlements") else ""
-    if sign_option == 'AUTO_SIGNING':
+    if sign_option == 'SIGN_ON_APPDOME':
         keystore_alias = f"--keystore_alias {args.keystore_alias}" if args.keystore_alias != "None" else ""
         keystore_key_pass = f"--key_pass {args.keystore_key_pass}" if args.keystore_key_pass != "None" else ""
 
