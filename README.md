@@ -1,8 +1,8 @@
 # Appdome Android Fuse&Sign action
 
-Actions are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools.
+Appdome's Build-2Secure GitHub Action is an out-of-the-box GitHub CI/CD integration, making it easy for mobile developers to automate the build, signing, and certification of security, anti-fraud, and other protections in Android & iOS apps in GitHub CI/CD pipelines. No code and no SDKs are required.
 
-Now you can easily secure and customize your mobile apps on GitHub using the Appdome GitHub Actions. No coding or technical expertise is required. Automate the process of adding security features such as encryption, biometric authentication, and more to your mobile apps. Additionally, sign your app with your own enterprise certificate for added flexibility and control. Get the flexibility and control you need to secure and customize your mobile apps with the Appdome GitHub action.
+The purpose of Appdome's Build-2Secure Action for GitHub is to streamline and accelerate cyber and anti-fraud delivery in CI/CD pipelines. To do this, the Build-2Secure Action for GitHub automates three important steps in delivering more secure mobile applications to your users fast: (1) building app-level protections into mobile apps, (2) code signing the protected mobile app, and (3) certifying the security of each protected mobile app. The Appdome Build-2Secure Action for GitHub can be used to deliver Certified Secure™ mobile app security, anti-fraud, anti-malware, mobile anti-bot, and other cyber defense updates to mobile apps on the Appdome Cyber Defense Automation Platform. Use this Action for GitHub as a stand-alone DevSecOps integration or in combination with other DevSecOps integrations in your CI/CD pipeline.  
 
 
 # Usage
