@@ -63,9 +63,9 @@ def main():
         os.mkdir("./files")
 
     if app_file.startswith('htt'):
-        download_file(app_file, f"./files/non_protected.{app_file[-3:]}")
+        download_file(app_file, f"./files/{os.path.basename(app_file)}")
     elif os.path.exists(app_file):
-        copy_files(app_file, f"./files/non_protected.{app_file[-3:]}")
+        copy_files(app_file, f"./files/{os.path.basename(app_file)}")
     else:
         print(f"Error couldn't compose {app_file}")
         exit(1)
