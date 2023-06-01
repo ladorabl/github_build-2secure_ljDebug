@@ -40,7 +40,7 @@ args = parse_args()
 
 
 def main():
-    os.mkdir('./output')
+    os.makedirs('./output', exist_ok=True)
     sign_option = args.sign_option
     appdome_api_key = args.appdome_api_key
     fusion_set = args.fusion_set
