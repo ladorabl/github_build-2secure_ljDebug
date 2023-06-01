@@ -45,7 +45,10 @@ def main():
     appdome_api_key = args.appdome_api_key
     fusion_set = args.fusion_set
     keystore_pass = args.keystore_pass
-    app_file = glob.glob('./files/non_protected.*')
+    extensions = ["*.apk", "*.aab", "*.ipa"]
+    app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")
+    print(app_file)
+#     app_file = glob.glob('./files/non_protected.*')
     if len(app_file) == 0:
         print("Couldn't locate non_protected app file on ./files/non_protected.*")
         exit(1)
