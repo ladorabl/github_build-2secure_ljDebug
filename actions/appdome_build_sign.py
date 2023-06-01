@@ -46,7 +46,7 @@ def main():
     fusion_set = args.fusion_set
     keystore_pass = args.keystore_pass
     extensions = ["*.apk", "*.aab", "*.ipa"]
-    app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")
+    app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")]
     print(app_file)
 #     app_file = glob.glob('./files/non_protected.*')
     if len(app_file) == 0:
