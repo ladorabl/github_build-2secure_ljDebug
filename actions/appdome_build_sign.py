@@ -47,13 +47,11 @@ def main():
     keystore_pass = args.keystore_pass
     extensions = ["*.apk", "*.aab", "*.ipa"]
     app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")]
-    print(app_file)
-#     app_file = glob.glob('./files/non_protected.*')
     if len(app_file) == 0:
         print("Couldn't locate non_protected app file on ./files/non_protected.*")
         exit(1)
-    app_extension = app_file[0][-4:]
-    app_name = app_file[0][:-4]
+    app_file = app_file[0]
+    app_name = os.path.basename(app_file) 
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
@@ -64,9 +62,9 @@ def main():
         keystore_alias = f"--keystore_alias {args.keystore_alias}" if args.keystore_alias != "None" else ""
         keystore_key_pass = f"--key_pass {args.keystore_key_pass}" if args.keystore_key_pass != "None" else ""
 
-        cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file[0]} " \
+        cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file} " \
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
-              f"--keystore_pass {keystore_pass} --output ./output/appdome_{app_name}{app_extension} " \
+              f"--keystore_pass {keystore_pass} --output ./output/Appdome_{app_name} " \
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
               f"{provision_profiles} {entitlements}"
 
@@ -77,8 +75,8 @@ def main():
         signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != "None" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
-              f"--app {app_file[0]} --private_signing -fs {fusion_set} {team_id} " \
-              f"--output ./output/appdome_{app_name}{app_extension} --certificate_output ./output/certificate.pdf " \
+              f"--app {app_file} --private_signing -fs {fusion_set} {team_id} " \
+              f"--output ./output/Appdome_{app_name} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
@@ -88,8 +86,8 @@ def main():
         signing_fingerprint = f"--signing_fingerprint {args.signing_fingerprint}" if args.signing_fingerprint != "None" else ""
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
-              f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
-              f"--output ./output/appdome_{app_name}{app_extension} --certificate_output ./output/certificate.pdf " \
+              f"--app {app_file} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
+              f"--output ./output/Appdome_{app_name} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
