@@ -9,8 +9,8 @@ The purpose of Appdome's Build-2Secure Action for GitHub is to streamline and ac
 
 See [action.yml](action.yml)
 
-## Android - AUTO_SIGNING
-
+### Android - AUTO_SIGNING
+```yaml
 name: Appdome build-2secure
 on:
   push:
