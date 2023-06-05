@@ -9,21 +9,32 @@ The purpose of Appdome's Build-2Secure Action for GitHub is to streamline and ac
 
 See [action.yml](action.yml)
 
-```yaml
-# "AUTO_SIGNING" - Android:
-steps:
-- name: Appdome build-2secure
-  uses: Appdome/github_build-2secure@1.0
-  with:
-    APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
-    FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
-    SIGN_OPTIONS: "SIGN_ON_APPDOME"
-    APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
-    KEYSTORE_FILE: ${{secrets.KEYSTORE}}
-    KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
-    KEYSTORE_ALIAS: ${{secrets.KEYSTORE_ALIAS}}
-    KEYSTORE_KEY_PASSWORD: ${{secrets.KEYSTORE_KEY_PASS}}
+## Android - AUTO_SIGNING
 
+name: Appdome build-2secure
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  appdome:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Appdome build-2secure
+        uses: Appdome/github_build-2secure@1.0
+        with:
+          APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
+          FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
+          SIGN_OPTIONS: "SIGN_ON_APPDOME"
+          APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
+          KEYSTORE_FILE: ${{secrets.KEYSTORE}}
+          KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
+          KEYSTORE_ALIAS: ${{secrets.KEYSTORE_ALIAS}}
+          KEYSTORE_KEY_PASSWORD: ${{secrets.KEYSTORE_KEY_PASS}}
+```
+```yaml
 # "AUTO_SIGNING" - iOS:
 steps:
 - name: Appdome build-2secure
