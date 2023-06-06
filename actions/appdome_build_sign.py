@@ -52,8 +52,7 @@ def main():
         exit(1)
     app_file = app_file[0]
     app_name = os.path.basename(app_file) 
-    print(app_file)
-    print(app_name)
+    app_ext = app_name[-4:]
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
@@ -66,7 +65,7 @@ def main():
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file} " \
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
-              f"--keystore_pass {keystore_pass} --output ./output/Appdome_{app_name} " \
+              f"--keystore_pass {keystore_pass} --output ./output/Appdome_secured_app.{app_ext} " \
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
               f"{provision_profiles} {entitlements}"
 
@@ -78,7 +77,7 @@ def main():
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file} --private_signing -fs {fusion_set} {team_id} " \
-              f"--output ./output/Appdome_{app_name} --certificate_output ./output/certificate.pdf " \
+              f"--output ./output/Appdome_secured_app.{app_ext} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
@@ -89,7 +88,7 @@ def main():
 
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
-              f"--output ./output/Appdome_{app_name} --certificate_output ./output/certificate.pdf " \
+              f"--output ./output/Appdome_secured_app.{app_ext} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
