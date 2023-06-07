@@ -100,7 +100,7 @@ runs:
       shell: bash
     - name: Find secure app file
       run: |
-        FILE=$(grep -l "Appdome_secured_app" ./output/*)
+        FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" -exec basename {} \;)
         echo "::set-output name=my_secure_app::$FILE"
       shell: bash
       
