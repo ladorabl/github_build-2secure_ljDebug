@@ -73,7 +73,7 @@ runs:
         ref: refs/heads/main
         path: appdome
     - name: Install requirements
-      run: sudo apt update | sudo apt install python3-pip | sudo pip3 install github | sudo pip3 install -r appdome/requirements.txt 
+      run: sudo apt update | sudo apt install python3-pip  | sudo pip3 install -r appdome/requirements.txt | pip3 install github
       shell: bash   
     - name: Cloning actions
       uses: actions/checkout@master
