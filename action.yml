@@ -63,7 +63,10 @@ inputs:
     description: 'your team-id'
     default: 'None'
     required: false
-
+outputs:
+  my_secure_app:
+    description: |-
+      Appdome build output
 runs:
   using: "composite"
   steps:
