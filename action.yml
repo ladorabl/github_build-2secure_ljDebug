@@ -99,4 +99,5 @@ runs:
       run: |
         FILE=$(grep -l "Appdome_secured_app" ./output/*)
         echo "::set-output name=my_secure_app::$FILE"
+      shell: bash
       
