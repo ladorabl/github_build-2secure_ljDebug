@@ -99,9 +99,9 @@ runs:
     - name: List files in output directory
       run: ls -al ./output/
       shell: bash
-   - name: Find secure app file
-     id: secure_app_file
-     run: |
-        FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
-        echo "my_secure_app=$FILE" >> $GITHUB_OUTPUT
+    - name: Find secure app file
+      id: secure_app_file
+      run: |
+         FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
+         echo "my_secure_app=$FILE" >> $GITHUB_OUTPUT
       
