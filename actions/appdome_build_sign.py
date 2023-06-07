@@ -53,11 +53,6 @@ def main():
     app_file = app_file[0]
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
-    my_secured_app = f"./output/Appdome_secured_app{app_ext}"
-    print(my_secured_app)
-    subprocess.check_call("pip3 install github".split())
-    from github import context
-    context.set_output("my_secured_app", my_secured_app)
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
