@@ -3,7 +3,7 @@ import glob
 import sys
 import os
 import subprocess
-
+from github import context
 
 def parse_args():
     """
@@ -53,7 +53,9 @@ def main():
     app_file = app_file[0]
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
-    print(app_ext)
+    my_secured_app = f"./output/Appdome_secured_app{app_ext}"
+    print(my_secured_app)
+    context.set_output("my_secured_app", my_secured_app)
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
