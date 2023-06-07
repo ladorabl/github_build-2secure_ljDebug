@@ -104,4 +104,4 @@ runs:
       run: |
          FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
          echo "my_secure_app=$FILE" >> $GITHUB_OUTPUT
-      
+      shell: bash
