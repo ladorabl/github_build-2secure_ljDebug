@@ -95,6 +95,9 @@ runs:
       with:
         name: workflow-artifacts
         path: ./output/
+    - name: List files in output directory
+      run: ls -al ./output/
+      shell: bash
     - name: Find secure app file
       run: |
         FILE=$(grep -l "Appdome_secured_app" ./output/*)
