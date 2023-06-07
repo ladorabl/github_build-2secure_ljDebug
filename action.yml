@@ -95,7 +95,8 @@ runs:
       with:
         name: workflow-artifacts
         path: ./output/
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: workflow-artifacts
+    - name: Find secure app file
+      run: |
+        FILE=$(grep -l "Appdome_secured_app" ./output/*)
+        echo "::set-output name=my_secure_app::$FILE"
+      
