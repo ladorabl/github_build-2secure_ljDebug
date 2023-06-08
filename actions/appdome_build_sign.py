@@ -57,11 +57,14 @@ def main():
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
     my_secure_app = f"./output/Appdome_secured_app{app_ext}"
-    if "GITHUB_OUTPUT" in new_env:
+    with open(os.environ["GITHUB_OUTPUT"], "r") as f:
+        print(f.read())
+    if "GITHUB_OUTPUT" in os.environ:
         print("ok we got in here")
-        with open(new_env["GITHUB_OUTPUT"], "a") as f :
+        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print("{0}={1}".format("my_secure_app", my_secure_app), file=f)
-    print("ok")
+    with open(os.environ["GITHUB_OUTPUT"], "r") as f:
+        print(f.read())
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
