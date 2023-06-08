@@ -39,6 +39,7 @@ print(new_env)
 new_env["APPDOME_CLIENT_HEADR"] = "Github/1.0.0"
 new_env["APPDOME_SERVER_BASE_URL"] = 'https://staging.appdome.com/'
 print(new_env['APPDOME_SERVER_BASE_URL'])
+print(new_env)
 args = parse_args()
 
 
