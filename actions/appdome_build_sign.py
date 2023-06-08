@@ -34,11 +34,11 @@ def parse_args():
 
 sys.path.extend([os.path.join(sys.path[0], '../..')])
 
-new_env = os.environ.copy()
 new_env["APPDOME_CLIENT_HEADR"] = "Github/1.0.0"
 os.environ['APPDOME_SERVER_BASE_URL'] = 'https://staging.appdome.com/'
 # new_env["APPDOME_SERVER_BASE_URL"] = 'https://staging.appdome.com/'
-print(os.environ['APPDOME_SERVER_BASE_URL'])
+new_env = os.environ.copy()
+print(new_env['APPDOME_SERVER_BASE_URL'])
 args = parse_args()
 
 
