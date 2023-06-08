@@ -56,6 +56,9 @@ def main():
     app_file = app_file[0]
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
+    my_secure_app = f"./output/Appdome_secured_app{app_ext}"
+    print(f"::set-output name=my_secure_app::{my_secure_app}")
+    print("ok")
     keystore_file = glob.glob('./files/cert.*')
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
