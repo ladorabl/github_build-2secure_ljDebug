@@ -94,8 +94,6 @@ runs:
     - name: Run appdome bash action files
       run: python3 ./actions/actions/appdome_build_sign.py -sign ${{ inputs.SIGN_OPTIONS }} -api_key ${{ inputs.APPDOME_API_TOKEN }} -fs ${{ inputs.FUSION_SET_ID }} -kp ${{ inputs.KEYSTORE_PASSWORD }} -ka ${{ inputs.KEYSTORE_ALIAS }} -kkp ${{ inputs.KEYSTORE_KEY_PASSWORD }} -team_id ${{ inputs.TEAM-ID }} -google-play-signing ${{ inputs.GOOGLE-PLAY-SIGNING }} -signing_fingerprint ${{ inputs.SIGN_FINGERPRINT }} 
       shell: bash
-      env:
-        APPDOME_SERVER_BASE_URL: "https://staging.appdome.com/"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
