@@ -65,7 +65,7 @@ inputs:
     required: false
 outputs:
   my_secure_app:
-    description: |-
+    description: 
       Appdome build output
 runs:
   using: "composite"
