@@ -36,7 +36,7 @@ sys.path.extend([os.path.join(sys.path[0], '../..')])
 os.environ["APPDOME_SERVER_BASE_URL"] = "https://staging.appdome.com/"
 new_env = os.environ.copy()
 print(new_env)
-new_env["APPDOME_CLIENT_HEADR"] = "Github/1.0.0"
+new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
 new_env["APPDOME_SERVER_BASE_URL"] = "https://staging.appdome.com/"
 print(new_env['APPDOME_SERVER_BASE_URL'])
 print(os.getenv('APPDOME_SERVER_BASE_URL'))
