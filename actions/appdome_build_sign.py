@@ -58,6 +58,7 @@ def main():
     app_ext = app_name[-4:]
     my_secure_app = f"./output/Appdome_secured_app{app_ext}"
     if "GITHUB_OUTPUT" in new_env:
+        print("ok we got in here")
         with open(new_env["GITHUB_OUTPUT"], "a") as f :
             print("{0}={1}".format("my_secure_app", my_secure_app), file=f)
     print("ok")
