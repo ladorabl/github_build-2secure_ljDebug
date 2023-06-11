@@ -59,7 +59,7 @@ def main():
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
     keystore_file = glob.glob('./files/cert.*')
-    build_with_logs = "-bl" if args.build_with_logs != "false" else ""
+    build_with_logs = " -bl" if args.build_with_logs != "false" else ""
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
@@ -73,7 +73,7 @@ def main():
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
               f"--keystore_pass {keystore_pass} --output ./output/Appdome_secured_app{app_ext} " \
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
-              f"{provision_profiles} {entitlements} {build_with_logs}"
+              f"{provision_profiles} {entitlements}{build_with_logs}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
@@ -84,7 +84,7 @@ def main():
         cmd = f"python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file} --private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/Appdome_secured_app{app_ext} --certificate_output ./output/certificate.pdf " \
-              f"{google_play_signing} {signing_fingerprint} {provision_profiles} {build_with_logs}"
+              f"{google_play_signing} {signing_fingerprint} {provision_profiles}{build_with_logs}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
@@ -95,7 +95,7 @@ def main():
         cmd = f"python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/Appdome_secured_app{app_ext} --certificate_output ./output/certificate.pdf " \
-              f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements} {build_with_logs}"
+              f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}{build_with_logs}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
         print("Signing option not found!\nValid signs: AUTO_SIGNING/PRIVATE_SIGNING/AUTO_DEV_SIGNING")
