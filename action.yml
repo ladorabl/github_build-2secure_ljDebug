@@ -111,3 +111,4 @@ runs:
     - name: Use secure app file
       run: |
         echo ${{ env.MY_SECURE_APP }}
+      shell: bash
