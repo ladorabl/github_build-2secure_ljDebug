@@ -106,6 +106,6 @@ runs:
       run: |
          FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
          echo $FILE
-         echo "my_secure_app=$FILE" >> $GITHUB_OUTPUT
-         cat $GITHUB_OUTPUT
+         echo "::set-output name=my_secure_app::$FILE"
+         cat $GITHUB_ENV
       shell: bash
