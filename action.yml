@@ -62,10 +62,6 @@ inputs:
     description: 'your team-id'
     default: 'None'
     required: false
-outputs:
-  my_secure_app:
-    description: 
-      Appdome build output
 runs:
   using: "composite"
   steps:
@@ -105,5 +101,5 @@ runs:
       id: secure_app_file
       run: |
          FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
-         echo "MY_SECURE_APP=$FILE" >> $GITHUB_ENV
+         echo "APPDOME_SECURED_APP=$FILE" >> $GITHUB_ENV
       shell: bash
