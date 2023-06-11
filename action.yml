@@ -106,6 +106,8 @@ runs:
       run: |
          FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
          echo $FILE
-         echo "::set-output name=my_secure_app::$FILE"
-         cat $GITHUB_ENV
+         echo "MY_SECURE_APP=$FILE" >> $GITHUB_ENV
       shell: bash
+    - name: Use secure app file
+      run: |
+        echo ${{ env.MY_SECURE_APP }}
