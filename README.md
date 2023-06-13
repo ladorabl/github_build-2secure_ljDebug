@@ -28,6 +28,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           KEYSTORE_FILE: ${{secrets.KEYSTORE}}
           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
@@ -54,6 +55,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
           SIGN_OPTIONS: "PRIVATE_SIGNING"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
           GOOGLE-PLAY-SIGNING: "true" -Optional
@@ -78,6 +80,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
           GOOGLE-PLAY-SIGNING: "true" -Optional
@@ -102,6 +105,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           KEYSTORE_FILE: ${{secrets.KEYSTORE}}
           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
@@ -132,6 +136,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
           SIGN_OPTIONS: "PRIVATE_SIGNING"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           KEYSTORE_FILE: ${{secrets.KEYSTORE}}
           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
@@ -159,6 +164,7 @@ jobs:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
+          BUILD_WITH_LOGS: true - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           MOBILE_PROVISION_PROFILE_FILE: "path/on/repository" "path/on/repository" ...
                                           OR “https download link” “https download link” ....
