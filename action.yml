@@ -72,6 +72,15 @@ inputs:
     default: false
     type: boolean
     required: false
+  BUILD_TO_TEST:
+    type: choice
+    description: "Build to test option"
+    options:
+      - BITBAR
+      - BROWSERSTACK
+      - LAMBDATEST
+      - SAUCELABS
+    required: false
 runs:
   using: "composite"
   steps:

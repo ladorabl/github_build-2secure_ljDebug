@@ -12,7 +12,7 @@ def parse_args():
     """
     parser = argparse.ArgumentParser("Appdome Build-2secure args")
     parser.add_argument("-sign", dest='sign_option', required=True,
-                        help="AUTO_SIGNING OR PRIVATE_SIGNING OR AUTO_DEV_SIGNING")
+                        help="SIGN_ON_APPDOME OR PRIVATE_SIGNING OR AUTO_DEV_SIGNING")
     parser.add_argument("-api_key", dest='appdome_api_key', required=True,
                         help='Appdome API key')
     parser.add_argument("-fs", dest='fusion_set', required=True,
@@ -33,6 +33,8 @@ def parse_args():
                         help="Do you want to build with logs?")
     parser.add_argument("--sign_second_output", dest='sign_second_output', required=False,
                         help="Universal apk output for aab apps?")
+    parser.add_argument("-bt", dest='build_to_test', required=False,
+                        help="SAUCELABS OR BITBAR OR LAMBDATEST OR BROWSERSTACK")
     return parser.parse_args()
 
 
@@ -62,13 +64,16 @@ def main():
     app_ext = app_name[-4:]
     keystore_file = glob.glob('./files/cert.*')
     build_with_logs = " -bl" if args.build_with_logs != "false" else ""
-    sign_second_output = " --sign_second_output ./output/Appdome_secured_app.apk" if (args.sign_second_output and app_ext == ".aab") \
-        else ""
+    sign_second_output = " --sign_second_output ./output/Appdome_secured_app.apk" if \
+        (args.sign_second_output and app_ext == ".aab") else ""
+    build_to_test = f" -bt AUTOMATION_{args.build_to_test}" if args.build_to_test else ""
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
     entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
         if os.path.exists("./files/entitlements") else ""
+
+    # Build command according to signing option
     if sign_option == 'SIGN_ON_APPDOME':
         keystore_alias = f"--keystore_alias {args.keystore_alias}" if args.keystore_alias != "None" else ""
         keystore_key_pass = f"--key_pass {args.keystore_key_pass}" if args.keystore_key_pass != "None" else ""
@@ -77,7 +82,7 @@ def main():
               f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
               f"--keystore_pass {keystore_pass} --output ./output/Appdome_secured_app{app_ext} " \
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
-              f"{provision_profiles} {entitlements}{build_with_logs}{sign_second_output}"
+              f"{provision_profiles} {entitlements}{build_with_logs}{sign_second_output}{build_to_test}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
@@ -88,7 +93,8 @@ def main():
         cmd = f"python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file} --private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/Appdome_secured_app{app_ext} --certificate_output ./output/certificate.pdf " \
-              f"{google_play_signing} {signing_fingerprint} {provision_profiles}{build_with_logs}{sign_second_output}"
+              f"{google_play_signing} {signing_fingerprint} {provision_profiles}{build_with_logs}{sign_second_output}" \
+              f"{build_to_test}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
@@ -100,7 +106,7 @@ def main():
               f"--app {app_file} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/Appdome_secured_app{app_ext} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}{build_with_logs}" \
-              f"{sign_second_output}"
+              f"{sign_second_output}{build_to_test}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
         print("Signing option not found!\nValid signs: AUTO_SIGNING/PRIVATE_SIGNING/AUTO_DEV_SIGNING")
