@@ -81,6 +81,7 @@ inputs:
       - LAMBDATEST
       - SAUCELABS
     required: false
+    default: "None"
 runs:
   using: "composite"
   steps:
@@ -121,4 +122,8 @@ runs:
       run: |
          FILE=$(find ./output/ -type f -name "Appdome_secured_app.*" )
          echo "APPDOME_SECURED_APP=$FILE" >> $GITHUB_ENV
+         FILE_SECOND_OUTPUT=$(find ./output/ -type f -name "Appdome_secured_app_second_output.apk" )
+         if [ -e "$FILE_SECOND_OUTPUT" ]; then
+            echo "APPDOME_SECURED_APP_SECOND_OUTPUT=$FILE_SECOND_OUTPUT" >> $GITHUB_ENV
+         fi
       shell: bash
