@@ -64,9 +64,9 @@ def main():
     app_ext = app_name[-4:]
     keystore_file = glob.glob('./files/cert.*')
     build_with_logs = " -bl" if args.build_with_logs != "false" else ""
-    sign_second_output = " --sign_second_output ./output/Appdome_secured_app.apk" if \
-        (args.sign_second_output and app_ext == ".aab") else ""
-    build_to_test = f" -bt AUTOMATION_{args.build_to_test}" if args.build_to_test else ""
+    sign_second_output = " --sign_second_output ./output/Appdome_secured_app_second_output.apk" if \
+        (args.sign_second_output != "false" and app_ext == ".aab") else ""
+    build_to_test = f" -bt {args.build_to_test}" if args.build_to_test != "None" else ""
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
