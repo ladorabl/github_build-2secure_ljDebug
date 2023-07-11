@@ -76,10 +76,10 @@ inputs:
     type: choice
     description: "Build to test option"
     options:
-      - BITBAR
-      - BROWSERSTACK
-      - LAMBDATEST
-      - SAUCELABS
+      - bitbar
+      - brownstack
+      - lambdatest
+      - saucelabs
     required: false
     default: "None"
 runs:
