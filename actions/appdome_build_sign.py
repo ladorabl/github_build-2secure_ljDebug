@@ -49,7 +49,6 @@ args = parse_args()
 
 
 def main():
-    print(args)
     os.makedirs('./output', exist_ok=True)
     sign_option = args.sign_option
     appdome_api_key = args.appdome_api_key
