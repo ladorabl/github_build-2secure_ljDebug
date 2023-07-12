@@ -77,7 +77,7 @@ inputs:
     description: "Build to test option"
     options:
       - bitbar
-      - brownstack
+      - browserstack
       - lambdatest
       - saucelabs
     required: false
