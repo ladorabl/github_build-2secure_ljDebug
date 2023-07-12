@@ -23,7 +23,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
@@ -50,7 +50,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -75,7 +75,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -100,7 +100,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -131,7 +131,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -159,7 +159,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.0
+        uses: Appdome/github_build-2secure@1.1.1
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
