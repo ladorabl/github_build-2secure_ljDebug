@@ -38,14 +38,13 @@ def parse_args():
     return parser.parse_args()
 
 
-sys.path.extend([os.path.join(sys.path[0], '../..')])
-
-new_env = os.environ.copy()
-
-new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
-# new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
-
-args = parse_args()
+def validate_args(platform, args):
+    if args.sign_option is None:
+        raise Exception("Please provide a signing option.")
+    if platform == "ios":
+        pass
+    else:
+        pass
 
 
 def main():
@@ -62,6 +61,8 @@ def main():
     app_file = app_file[0]
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
+    platform = "ios" if app_ext == ".ipa" else "android"
+    validate_args(platform, args)
     keystore_file = glob.glob('./files/cert.*')
     build_with_logs = " -bl" if args.build_with_logs != "false" else ""
     sign_second_output = " --sign_second_output ./output/Appdome_secured_app_second_output.apk" if \
@@ -113,4 +114,12 @@ def main():
 
 
 if __name__ == '__main__':
+    sys.path.extend([os.path.join(sys.path[0], '../..')])
+
+    new_env = os.environ.copy()
+
+    new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
+    new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
+
+    args = parse_args()
     main()
