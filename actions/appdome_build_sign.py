@@ -69,7 +69,11 @@ def main():
     app_name = os.path.basename(app_file) 
     app_ext = app_name[-4:]
     platform = "ios" if app_ext == ".ipa" else "android"
-    validate_args(platform, args)
+    try:
+        validate_args(platform, args)
+    except Exception as e:
+        print(e)
+        exit(1)
     keystore_file = glob.glob('./files/cert.*')
     build_with_logs = " -bl" if args.build_with_logs != "false" else ""
     sign_second_output = " --sign_second_output ./output/Appdome_secured_app_second_output.apk" if \
