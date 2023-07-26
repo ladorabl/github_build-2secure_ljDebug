@@ -37,6 +37,14 @@ def parse_args():
                         help="SAUCELABS OR BITBAR OR LAMBDATEST OR BROWSERSTACK")
     return parser.parse_args()
 
+sys.path.extend([os.path.join(sys.path[0], '../..')])
+
+new_env = os.environ.copy()
+
+new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
+new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
+
+args = parse_args()
 
 def validate_args(platform, args):
     raise Exception("Please provide a signing option.")
@@ -113,12 +121,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.path.extend([os.path.join(sys.path[0], '../..')])
-
-    new_env = os.environ.copy()
-
-    new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
-    new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
-
-    args = parse_args()
     main()
