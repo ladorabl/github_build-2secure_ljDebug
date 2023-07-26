@@ -39,12 +39,11 @@ def parse_args():
 
 
 def validate_args(platform, args):
-    if args.sign_option is None:
-        raise Exception("Please provide a signing option.")
-    if platform == "ios":
-        pass
-    else:
-        pass
+    raise Exception("Please provide a signing option.")
+    # if platform == "ios":
+    #     pass
+    # else:
+    #     pass
 
 
 def main():
