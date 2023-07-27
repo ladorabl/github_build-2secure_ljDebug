@@ -29,7 +29,7 @@ def parse_args():
                         help="google play signing", default="false")
     parser.add_argument("-signing_fingerprint", dest='signing_fingerprint', required=False,
                         help="signing_fingerprint", default="None")
-    parser.add_argument("-bl", dest='build_with_logs', required=True,
+    parser.add_argument("-bl", dest='build_with_logs', required=False,
                         help="Do you want to build with logs?")
     parser.add_argument("--sign_second_output", dest='sign_second_output', required=False,
                         help="Universal apk output for aab apps?")
