@@ -75,7 +75,7 @@ def validate_args(platform, arguments, keystore_file, provision_profiles, entitl
                 print("No entitlements file specified")
                 error = True
     else:
-        if arguments.sign_options == "SIGN_ON_APPDOME":
+        if arguments.sign_option == "SIGN_ON_APPDOME":
             if len(keystore_file) == 0:
                 print("No keystore file specified")
                 error = True
