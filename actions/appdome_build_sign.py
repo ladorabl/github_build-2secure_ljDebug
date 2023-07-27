@@ -92,7 +92,7 @@ def validate_args(platform, arguments, keystore_file, provision_profiles, entitl
                 print("No signing fingerprint specified")
                 error = True
     if error:
-        exit(1)
+        sys.exit(1)
 
 
 def main():
@@ -105,7 +105,7 @@ def main():
     app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")]
     if len(app_file) == 0:
         print("Couldn't locate non_protected app file on ./files/non_protected.*")
-        exit(1)
+        sys.exit(1)
     app_file = app_file[0]
     app_name = os.path.basename(app_file)
     app_ext = app_name[-4:]
