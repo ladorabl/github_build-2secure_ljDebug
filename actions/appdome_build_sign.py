@@ -48,6 +48,7 @@ args = parse_args()
 
 
 def validate_args(platform, arguments, keystore_file, provision_profiles, entitlements):
+    print("entered validate")
     error = False
     if arguments.sign_option is None or arguments.sign_option == "None":
         print("No signing option specified")
@@ -96,6 +97,7 @@ def validate_args(platform, arguments, keystore_file, provision_profiles, entitl
 
 
 def main():
+    print(args)
     os.makedirs('./output', exist_ok=True)
     sign_option = args.sign_option
     appdome_api_key = args.appdome_api_key
