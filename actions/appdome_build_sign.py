@@ -159,7 +159,7 @@ def main():
               f"--app {app_file} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/Appdome_secured_app{app_ext} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}{build_with_logs}" \
-              f"{sign_second_output}{build_to_test}"
+              f"{build_to_test}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
         print("Signing option not found!\nValid signs: AUTO_SIGNING/PRIVATE_SIGNING/AUTO_DEV_SIGNING")
