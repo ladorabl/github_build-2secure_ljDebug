@@ -42,7 +42,6 @@ sys.path.extend([os.path.join(sys.path[0], '../..')])
 new_env = os.environ.copy()
 
 new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
-new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
 
 args = parse_args()
 
