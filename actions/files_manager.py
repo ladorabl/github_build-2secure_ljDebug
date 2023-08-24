@@ -35,7 +35,11 @@ def decode_base64(s, file_path):
 
 def download_file(url, dest_file):
     import requests
-    response = requests.get(url)
+    from urllib.parse import urlparse, parse_qs
+    url_parts = urlparse(url)
+    query_params = parse_qs(url_parts.query)
+    clean_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}"
+    response = requests.get(clean_url, params=query_params)
     if response.status_code < 300:
         with open(dest_file, "wb") as file:
             file.write(response.content)
@@ -61,6 +65,7 @@ def main():
     keystore = args.keystore
     provision_profiles = args.provision_profiles
     entitlements = args.entitlements
+    print(keystore)
 
     ios_flag = True if app_file.endswith('.ipa') else False
     if not os.path.isdir("./files"):
@@ -74,7 +79,7 @@ def main():
         print(f"Error couldn't compose {app_file}")
         exit(1)
 
-    if keystore != "None":
+    if keystore and keystore != "None":
         if keystore.startswith('htt'):
             download_file(keystore, f"./files/cert.p12") if ios_flag else download_file(keystore, f"./files/cert.keystore")
         elif os.path.exists(keystore):
@@ -85,7 +90,7 @@ def main():
             print(f"Error couldn't compose {keystore}")
             exit(1)
 
-    if provision_profiles != "None":
+    if provision_profiles and provision_profiles != "None":
         if not os.path.exists("./files/provision_profiles"):
             os.mkdir("./files/provision_profiles")
         if is_base64(provision_profiles):
@@ -100,7 +105,7 @@ def main():
             print(f"Error couldn't compose {provision_profiles}")
             exit(1)
 
-    if entitlements != "None":
+    if entitlements and entitlements != "None":
         if not os.path.exists("./files/entitlements"):
             os.mkdir("./files/entitlements")
         if is_base64(entitlements):
