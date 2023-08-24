@@ -29,7 +29,7 @@ def parse_args():
                         help="google play signing", default="false")
     parser.add_argument("-signing_fingerprint", dest='signing_fingerprint', required=False,
                         help="signing_fingerprint", default="None")
-    parser.add_argument("-bl", dest='build_with_logs', required=True,
+    parser.add_argument("-bl", dest='build_with_logs', required=False,
                         help="Do you want to build with logs?")
     parser.add_argument("--sign_second_output", dest='sign_second_output', required=False,
                         help="Universal apk output for aab apps?")
@@ -37,18 +37,66 @@ def parse_args():
                         help="SAUCELABS OR BITBAR OR LAMBDATEST OR BROWSERSTACK")
     return parser.parse_args()
 
-
 sys.path.extend([os.path.join(sys.path[0], '../..')])
 
 new_env = os.environ.copy()
 
 new_env["APPDOME_CLIENT_HEADER"] = "Github/1.0.0"
-# new_env["APPDOME_SERVER_BASE_URL"] = "https://qamaster.dev.appdome.com/"
 
 args = parse_args()
 
 
+def validate_args(platform, arguments, keystore_file, provision_profiles, entitlements):
+    print("entered validate")
+    error = False
+    if arguments.sign_option is None or arguments.sign_option == "None":
+        print("No signing option specified")
+        error = True
+    if arguments.appdome_api_key == "None":
+        print("No API key specified")
+        error = True
+    if arguments.fusion_set == "None":
+        print("No fusion set specified")
+        error = True
+    if platform == "ios":
+        if len(provision_profiles) == 0:
+            print("No mobile provisioning profile file specified")
+            error = True
+        if arguments.sign_option in ["SIGN_ON_APPDOME", "PRIVATE_SIGNING"]:
+            if len(keystore_file) == 0:
+                print("No certificate file specified")
+                error = True
+            if arguments.keystore_pass == "None":
+                print("No certificate password specified")
+                error = True
+        if arguments.sign_option in ["SIGN_ON_APPDOME", "AUTO_DEV_SIGNING"]:
+            if len(entitlements) == 0:
+                print("No entitlements file specified")
+                error = True
+    else:
+        if arguments.sign_option == "SIGN_ON_APPDOME":
+            if len(keystore_file) == 0:
+                print("No keystore file specified")
+                error = True
+            if arguments.keystore_pass == "None":
+                print("No keystore password specified")
+                error = True
+            if arguments.keystore_alias == "None":
+                print("No keystore alias specified")
+                error = True
+            if arguments.keystore_key_pass == "None":
+                print("No keystore key pass specified")
+                error = True
+        else:
+            if arguments.signing_fingerprint == "None":
+                print("No signing fingerprint specified")
+                error = True
+    if error:
+        sys.exit(1)
+
+
 def main():
+    print(args)
     os.makedirs('./output', exist_ok=True)
     sign_option = args.sign_option
     appdome_api_key = args.appdome_api_key
@@ -58,20 +106,24 @@ def main():
     app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")]
     if len(app_file) == 0:
         print("Couldn't locate non_protected app file on ./files/non_protected.*")
-        exit(1)
+        sys.exit(1)
     app_file = app_file[0]
-    app_name = os.path.basename(app_file) 
+    app_name = os.path.basename(app_file)
     app_ext = app_name[-4:]
+    platform = "ios" if app_ext == ".ipa" else "android"
     keystore_file = glob.glob('./files/cert.*')
+    provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
+        if os.path.exists("./files/provision_profiles") else ""
+    entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
+        if os.path.exists("./files/entitlements") else ""
+
+    validate_args(platform, args, keystore_file, provision_profiles, entitlements)
+
     build_with_logs = " -bl" if args.build_with_logs != "false" else ""
     sign_second_output = " --sign_second_output ./output/Appdome_secured_app_second_output.apk" if \
         (args.sign_second_output != "false" and app_ext == ".aab") else ""
     build_to_test = f" -bt {args.build_to_test}" if args.build_to_test != "None" else ""
     team_id = f"--team_id {args.team_id}" if args.team_id != "None" else ""
-    provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
-        if os.path.exists("./files/provision_profiles") else ""
-    entitlements = f"--entitlements {' '.join(glob.glob('./files/entitlements/*'))}" \
-        if os.path.exists("./files/entitlements") else ""
 
     # Build command according to signing option
     if sign_option == 'SIGN_ON_APPDOME':
