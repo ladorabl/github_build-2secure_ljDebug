@@ -92,13 +92,13 @@ runs:
         ref: refs/heads/main
         path: appdome
     - name: Install requirements
-      run: sudo apt update | sudo apt install python3-pip  | sudo pip3 install -r appdome/requirements.txt
+      run: sudo pip3 install -r appdome/requirements.txt
       shell: bash   
     - name: Cloning actions
       uses: actions/checkout@master
       with:
         repository: Appdome/github_build-2secure
-        ref: refs/heads/main
+        ref: refs/heads/eldan_macos
         path: actions
     - name: permissions
       run: chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
