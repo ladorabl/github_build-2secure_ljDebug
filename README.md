@@ -23,7 +23,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
@@ -52,7 +52,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -79,7 +79,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -105,7 +105,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -137,7 +137,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -145,8 +145,6 @@ jobs:
           BUILD_WITH_LOGS: true - Optional
           BUILD_TO_TEST: "lambdatest" | "bitbar" | "browserstack" | "saucelabs" - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
-          KEYSTORE_FILE: ${{secrets.KEYSTORE}}
-          KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
           MOBILE_PROVISION_PROFILE_FILE: "path/on/repository" "path/on/repository" ...
                                           OR “https download link” “https download link” ....
                                           OR ${{secrets.PROVISION_PROFILE_BASE64}}
@@ -166,7 +164,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.1
+        uses: Appdome/github_build-2secure@1.1.4
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
