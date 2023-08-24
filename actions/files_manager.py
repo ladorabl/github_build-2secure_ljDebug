@@ -59,8 +59,6 @@ def main():
         exit(1)
 
     keystore = args.keystore
-    if keystore == "None":
-        print("No keystore file specified")
     provision_profiles = args.provision_profiles
     entitlements = args.entitlements
 
