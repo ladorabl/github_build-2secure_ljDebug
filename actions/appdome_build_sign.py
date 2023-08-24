@@ -62,7 +62,7 @@ def validate_args(platform, arguments, keystore_file, provision_profiles, entitl
         if len(provision_profiles) == 0:
             print("No mobile provisioning profile file specified")
             error = True
-        if arguments.sign_option in ["SIGN_ON_APPDOME", "PRIVATE_SIGNING"]:
+        if arguments.sign_option in ["SIGN_ON_APPDOME"]:
             if len(keystore_file) == 0:
                 print("No certificate file specified")
                 error = True
