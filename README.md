@@ -23,7 +23,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android/iOS"
@@ -36,6 +36,7 @@ jobs:
           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
           KEYSTORE_ALIAS: ${{secrets.KEYSTORE_ALIAS}}
           KEYSTORE_KEY_PASSWORD: ${{secrets.KEYSTORE_KEY_PASS}}
+          OUTPUT_APP_NAME: "Output_app_name" - Optional, will also apply for second output universal apk
 ```
 
 ### Android - PRIVATE_SIGNING
@@ -52,7 +53,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -63,6 +64,7 @@ jobs:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
           GOOGLE-PLAY-SIGNING: "true" -Optional
+          OUTPUT_APP_NAME: "Output_app_name" - Optional, will also apply for second output universal apk
 ```
 
 ### Android - AUTO_DEV_SIGNING
@@ -79,7 +81,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id Android"
@@ -89,6 +91,7 @@ jobs:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
           GOOGLE-PLAY-SIGNING: "true" -Optional
+          OUTPUT_APP_NAME: "Output_app_name" - Optional
 ```
 
 ### iOS - AUTO_SIGNING
@@ -105,7 +108,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -113,14 +116,15 @@ jobs:
           BUILD_WITH_LOGS: true - Optional
           BUILD_TO_TEST: "lambdatest" | "bitbar" | "browserstack" | "saucelabs" - Optional
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
-          KEYSTORE_FILE: ${{secrets.KEYSTORE}}
-          KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
+          CERTIFICATE_FILE: ${{secrets.CERTIFICATE}}
+          CERTIFICATE_PASSWORD: ${{secrets.CERTIFICATE_PASSWORD}}
           ENTITLEMENTS_FILE: "path/on/repository" "path/on/repository" ... 
                               OR “https download link” “https download link” ....
                               OR ${{secrets.ENTITLEMENTS_BASE64}}
           MOBILE_PROVISION_PROFILE_FILE: "path/on/repository" "path/on/repository" ...
                                           OR “https download link” “https download link” ....
                                           OR ${{secrets.PROVISION_PROFILE_BASE64}}
+          OUTPUT_APP_NAME: "Output_app_name" - Optional
 ```
 
 ### iOS - PRIVATE_SIGNING
@@ -137,7 +141,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -148,6 +152,7 @@ jobs:
           MOBILE_PROVISION_PROFILE_FILE: "path/on/repository" "path/on/repository" ...
                                           OR “https download link” “https download link” ....
                                           OR ${{secrets.PROVISION_PROFILE_BASE64}}
+          OUTPUT_APP_NAME: "Output_app_name" - Optional
 ```
 
 ### iOS - AUTO_DEV_SIGNING
@@ -164,7 +169,7 @@ jobs:
     
     steps:
       - name: Appdome build-2secure
-        uses: Appdome/github_build-2secure@1.1.4
+        uses: Appdome/github_build-2secure@1.2.0
         with:
           APP_FILE: "# none_protected_application can be pass as path/on/repository OR https://download_link"
           FUSION_SET_ID: "Appdome Fusion Set_Id iOS"
@@ -178,5 +183,6 @@ jobs:
           ENTITLEMENTS_FILE: "path/on/repository" "path/on/repository" ... 
                               OR “https download link” “https download link” ....
                               OR ${{secrets.ENTITLEMENTS_BASE64}}
+          OUTPUT_APP_NAME: "Output_app_name" - Optional
 ```
 
