@@ -114,7 +114,7 @@ def main():
     app_name = os.path.basename(app_file)
     app_ext = app_name[-4:]
     platform = "ios" if app_ext == ".ipa" else "android"
-    keystore_pass = keystore_pass if keystore_pass else certificate_pass
+    keystore_pass = keystore_pass if (keystore_pass and keystore_pass != "None") else certificate_pass
     keystore_file = glob.glob('./files/cert.*')
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
