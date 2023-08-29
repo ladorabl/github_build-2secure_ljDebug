@@ -19,6 +19,8 @@ def parse_args():
                         help="Appdome fusion set")
     parser.add_argument("-kp", dest='keystore_pass', required=False,
                         help="keystore password", default="None")
+    parser.add_argument("-cp", dest='certificate_pass', required=False,
+                        help="certificate password", default="None")
     parser.add_argument("-ka", dest='keystore_alias', required=False,
                         help="keystore alias", default="None")
     parser.add_argument("-kkp", dest='keystore_key_pass', required=False,
@@ -66,7 +68,7 @@ def validate_args(platform, arguments, keystore_file, provision_profiles, entitl
             if len(keystore_file) == 0:
                 print("No certificate file specified")
                 error = True
-            if arguments.keystore_pass == "None":
+            if arguments.certificate_pass == "None":
                 print("No certificate password specified")
                 error = True
         if arguments.sign_option in ["SIGN_ON_APPDOME", "AUTO_DEV_SIGNING"]:
@@ -102,6 +104,7 @@ def main():
     appdome_api_key = args.appdome_api_key
     fusion_set = args.fusion_set
     keystore_pass = args.keystore_pass
+    certificate_pass = args.certificate_pass
     extensions = ["*.apk", "*.aab", "*.ipa"]
     app_file = [file for extension in extensions for file in glob.glob(f"./files/{extension}")]
     if len(app_file) == 0:
@@ -111,6 +114,7 @@ def main():
     app_name = os.path.basename(app_file)
     app_ext = app_name[-4:]
     platform = "ios" if app_ext == ".ipa" else "android"
+    keystore_pass = keystore_pass if keystore_pass else certificate_pass
     keystore_file = glob.glob('./files/cert.*')
     provision_profiles = f"--provisioning_profiles {' '.join(glob.glob('./files/provision_profiles/*'))}" \
         if os.path.exists("./files/provision_profiles") else ""
