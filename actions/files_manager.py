@@ -68,16 +68,26 @@ def main():
     certificate = args.certificate
     provision_profiles = args.provision_profiles
     entitlements = args.entitlements
-    print(keystore)
 
-    ios_flag = True if app_file.endswith('.ipa') else False
+    ext = None
+    ios_flag = None
+    if '.ipa' in app_file:
+        ios_flag = True
+        ext = 'ipa'
+    elif '.apk' in app_file:
+        ios_flag = False
+        ext = 'apk'
+    elif '.aab' in app_file:
+        ios_flag = False
+        ext = 'aab'
+
     if not os.path.isdir("./files"):
         os.mkdir("./files")
 
     if app_file.startswith('htt'):
-        download_file(app_file, f"./files/{os.path.basename(app_file)}")
+        download_file(app_file, f"./files/vanilla_app.{ext}")
     elif os.path.exists(app_file):
-        copy_files(app_file, f"./files/{os.path.basename(app_file)}")
+        copy_files(app_file, f"./files/vanilla_app.{ext}")
     else:
         print(f"Error couldn't compose {app_file}")
         exit(1)
@@ -111,10 +121,10 @@ def main():
             decode_base64(provision_profiles, "./files/provision_profiles/0.mobileprovision")
         elif provision_profiles.startswith('htt'):
             for index, url in enumerate(provision_profiles.split(',')):
-                download_file(url, f"./files/provision_profiles/{index}.mobileprovision")
+                download_file(url.strip(), f"./files/provision_profiles/{index}.mobileprovision")
         elif os.path.exists(provision_profiles.split(',')[0]):
             for index, path in enumerate(provision_profiles.split(',')):
-                copy_files(path, f"./files/provision_profiles/{index}.mobileprovision")
+                copy_files(path.strip(), f"./files/provision_profiles/{index}.mobileprovision")
         else:
             print(f"Error couldn't compose {provision_profiles}")
             exit(1)
@@ -126,10 +136,10 @@ def main():
             decode_base64(entitlements, "./files/entitlements/0.plist")
         elif entitlements.startswith('htt'):
             for index, url in enumerate(entitlements.split(',')):
-                download_file(url, f"./files/entitlements/{index}.plist")
+                download_file(url.strip(), f"./files/entitlements/{index}.plist")
         elif os.path.exists(entitlements.split(',')[0]):
             for index, path in enumerate(entitlements.split(',')):
-                copy_files(path, f"./files/entitlements/{index}.plist")
+                copy_files(path.strip(), f"./files/entitlements/{index}.plist")
         else:
             print(f"Error couldn't compose {entitlements}")
             exit(1)
