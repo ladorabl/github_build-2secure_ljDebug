@@ -140,16 +140,16 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: workflow-artifacts
-        path: ${{ env.OUTPUT_DIR }}
+        path: $OUTPUT_DIR
     - name: List files in output directory
-      run: ls -al "${{ env.OUTPUT_DIR }}"
+      run: ls -al "$OUTPUT_DIR"
       shell: bash
     - name: Find secure app file
       id: secure_app_file
       run: |
-         FILE=$(find "${{ env.OUTPUT_DIR }}" -type f -name "${{ inputs.OUTPUT_APP_NAME }}.*" )
+         FILE=$(find "$OUTPUT_DIR" -type f -name "${{ inputs.OUTPUT_APP_NAME }}.*" )
          echo "APPDOME_SECURED_APP=$FILE" >> $GITHUB_ENV
-         FILE_SECOND_OUTPUT=$(find "${{ env.OUTPUT_DIR }}" -type f -name "${{ inputs.OUTPUT_APP_NAME }}_second_output.apk" )
+         FILE_SECOND_OUTPUT=$(find "$OUTPUT_DIR" -type f -name "${{ inputs.OUTPUT_APP_NAME }}_second_output.apk" )
          if [ -e "$FILE_SECOND_OUTPUT" ]; then
             echo "APPDOME_SECURED_APP_SECOND_OUTPUT=$FILE_SECOND_OUTPUT" >> $GITHUB_ENV
          fi
