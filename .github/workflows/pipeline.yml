@@ -93,7 +93,7 @@ jobs:
           BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
           OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
           BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
-
+          
 
 #  APK_PRIVATE_SIGNING:
 #    needs: APK_SIGN_ON_APPDOME
