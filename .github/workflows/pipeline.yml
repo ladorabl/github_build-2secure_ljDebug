@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: print directory
+        run: |
+          ls
+        shell: bash
+
       - name: Generate and Publish Presigned URLs
         run: python scripts/generate_presigned_urls.py
         env:
