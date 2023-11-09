@@ -281,7 +281,7 @@ jobs:
           fi
 
   AAB_SIGN_ON_APPDOME:
-    needs: APK_AUTO_DEV_SIGNING
+    needs: Presign_URLs
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
