@@ -55,11 +55,6 @@ jobs:
         id: random-options
         run: |
           if [[ $((RANDOM % 2)) == 1 ]]; then
-            second_output=true
-          else
-            second_output=false
-          fi
-          if [[ $((RANDOM % 2)) == 1 ]]; then
             build_with_logs=true
           else
             build_with_logs=false
@@ -74,7 +69,6 @@ jobs:
           output_name_options=("None" "test_app" "test_dir/test_app" "test_dir/test_app.aab" "test_app.apk")
           output_name_index=$((RANDOM % ${#build_to_test_options[@]}))
   
-          echo "SECOND_OUTPUT=${second_output}" >> $GITHUB_OUTPUT
           echo "BUILD_WITH_LOGS=${build_with_logs}" >> $GITHUB_OUTPUT
           echo "OUTPUT_APP_NAME=${output_name_options[$output_name_index]}" >> $GITHUB_OUTPUT
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
@@ -94,7 +88,6 @@ jobs:
           FUSION_SET_ID: ${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}
           SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
           GOOGLE-PLAY-SIGNING: ${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}
-          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
           BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
           OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
           BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
@@ -107,16 +100,6 @@ jobs:
           else
             echo "Error: APPDOME_SECURED_APP is missing or empty"
             exit 1
-          fi
-          
-          # Check APPDOME_SECURED_APP_SECOND_OUTPUT if SECOND_OUTPUT is true
-          if [[ "${{ steps.random-options.outputs.SECOND_OUTPUT }}" == "true" ]]; then
-            if [ -n "${{ env.APPDOME_SECURED_APP_SECOND_OUTPUT }}" ]; then
-              echo "APPDOME_SECURED_APP_SECOND_OUTPUT exists and is not empty"
-            else
-              echo "Error: APPDOME_SECURED_APP_SECOND_OUTPUT is missing or empty"
-              exit 1
-            fi
           fi
 
       - name: download artifact
@@ -162,11 +145,6 @@ jobs:
 #        id: random-options
 #        run: |
 #          if [[ $((RANDOM % 2)) == 1 ]]; then
-#            second_output=true
-#          else
-#            second_output=false
-#          fi
-#          if [[ $((RANDOM % 2)) == 1 ]]; then
 #            build_with_logs=true
 #          else
 #            build_with_logs=false
@@ -181,7 +159,6 @@ jobs:
 #          output_name_options=("None" "test_app" "test_dir/test_app" "test_dir/test_app.aab" "test_app.apk")
 #          output_name_index=$((RANDOM % ${#build_to_test_options[@]}))
 #
-#          echo "SECOND_OUTPUT=${second_output}" >> $GITHUB_OUTPUT
 #          echo "BUILD_WITH_LOGS=${build_with_logs}" >> $GITHUB_OUTPUT
 #          echo "OUTPUT_APP_NAME=${output_name_options[$output_name_index]}" >> $GITHUB_OUTPUT
 #          echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
@@ -197,7 +174,6 @@ jobs:
 #          FUSION_SET_ID: ${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}
 #          SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
 #          GOOGLE-PLAY-SIGNING: ${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}
-#          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
 #          BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
 #          OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
 #          BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
