@@ -46,6 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: presigned-urls
+          path: presigned-urls
 
       - name: print 2
         run: |
@@ -54,8 +55,8 @@ jobs:
 
       - name: Read APK App and Keystore URLs
         run: |
-          apk_app_url=$(cat presigned-urls/presigned-url-apk_app)
-          keystore_file_url=$(cat presigned-urls/presigned-url-keystore_file)
+          apk_app_url=$(cat presigned-urls/apk_app.txt)
+          keystore_file_url=$(cat presigned-urls/keystore_file.txt)
           echo "APK App URL: $apk_app_url"
           echo "Keystore File URL: $keystore_file_url"
           echo "::set-output name=apk_app::$apk_app_url"
