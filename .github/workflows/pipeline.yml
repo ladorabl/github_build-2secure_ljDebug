@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: print directory
+      - name: install boto3
         run: |
           python -m pip install --upgrade pip
           pip install boto3
@@ -37,10 +37,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: print 1
+        run: |
+          ls -R
+        shell: bash
+
       - name: Download Presigned URLs Artifact
         uses: actions/download-artifact@v3
         with:
           name: presigned-urls
+
+      - name: print 2
+        run: |
+          ls -R
+        shell: bash
 
       - name: Read APK App and Keystore URLs
         run: |
