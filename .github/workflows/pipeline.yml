@@ -623,7 +623,6 @@ jobs:
           MOBILE_PROVISION_PROFILE_FILE: ${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE }}
           ENTITLEMENTS_FILE: ${{ steps.urls.outputs.ENTITLEMENTS_FILE }}
           FUSION_SET_ID: ${{secrets.APPDOME_IOS_FUSION_SET_ID}}
-          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
           BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
           OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
           BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
