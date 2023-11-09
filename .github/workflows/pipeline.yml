@@ -105,7 +105,7 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v2
         with:
-          name: workflow-artifact
+          name: workflow-artifacts
           path: ${{ github.workspace }}/downloaded-artifact
 
       - name: Check Artifact
@@ -120,7 +120,7 @@ jobs:
 
       - uses: geekyeggo/delete-artifact@v2
         with:
-            name: workflow-artifact
+            name: workflow-artifacts
 
 #  APK_PRIVATE_SIGNING:
 #    needs: APK_SIGN_ON_APPDOME
