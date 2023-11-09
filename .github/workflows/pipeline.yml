@@ -295,7 +295,7 @@ jobs:
           name: workflow-artifacts
 
   AAB_SIGN_ON_APPDOME:
-    needs: Presign_URLs
+    needs: APK_AUTO_DEV_SIGNING
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
