@@ -47,9 +47,6 @@ jobs:
         run: |
           apk_app_url=$(cat presigned-urls/apk_app.txt)
           keystore_file_url=$(cat presigned-urls/keystore_file.txt)
-          echo "APK App URL: $apk_app_url"
-          echo "Keystore File URL: $keystore_file_url"
-          echo "::set-output name=apk_app::$apk_app_url"
           echo "APK_APP=$apk_app_url" >> $GITHUB_OUTPUT
           echo "KEYSTORE_FILE=$keystore_file_url" >> $GITHUB_OUTPUT
         id: urls
@@ -102,78 +99,121 @@ jobs:
           OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
           BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
 
-#  APK_PRIVATE_SIGNING:
-#    needs: APK_SIGN_ON_APPDOME
-#    runs-on: 'ubuntu-latest'
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set random options
-#        id: random-options
-#        run: |
-#          if [[ $((RANDOM % 2)) == 1 ]]; then
-#            second_output=true
-#          else
-#            second_output=false
-#          fi
-#          if [[ $((RANDOM % 2)) == 1 ]]; then
-#            build_with_logs=true
-#          else
-#            build_with_logs=false
-#          fi
-#          build_to_test_options=("bitbar" "browserstack" "lambdatest" "saucelabs" "None")
-#          build_to_test_index=$((RANDOM % ${#build_to_test_options[@]})
-#
-#          # Set output variables
-#          echo "SECOND_OUTPUT=${second_output}"
-#          echo "BUILD_WITH_LOGS=${build_with_logs}"
-#          echo "OUTPUT_APP_NAME=appdome_output_${RANDOM}.aab"
-#          echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}"
-#        shell: bash
-#
-#      - name: Run the Appdome plugin
-#        uses: Appdome/github_build-2secure@latest
-#        with:
-#          APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
-#          SIGN_OPTIONS: "PRIVATE_SIGNING"
-#          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
-#          BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
-#          OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
-#          BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
-#          APP_FILE: ${{ steps.Presign_URLs.outputs.presigned-url-apk_app }}
+  APK_PRIVATE_SIGNING:
+    needs: APK_SIGN_ON_APPDOME
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-#  APK_AUTO_DEV_SIGNING:
-#    needs: APK_PRIVATE_SIGNING
-#    runs-on: 'ubuntu-latest'
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set random options
-#        id: random-options
-#        run: |
-#          if [[ $((RANDOM % 2)) == 1 ]]; then
-#            build_with_logs=true
-#          else
-#            build_with_logs=false
-#          fi
-#          build_to_test_options=("bitbar" "browserstack" "lambdatest" "saucelabs" "None")
-#          build_to_test_index=$((RANDOM % ${#build_to_test_options[@]})
-#
-#          echo "BUILD_WITH_LOGS=${build_with_logs}"
-#          echo "OUTPUT_APP_NAME=appdome_output_${RANDOM}.aab"
-#          echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}"
-#        shell: bash
-#
-#      - name: Run the Appdome plugin
-#        uses: Appdome/github_build-2secure@latest
-#        with:
-#          APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
-#          SIGN_OPTIONS: "AUTO_DEV_SIGNING"
-#          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
-#          BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
-#          OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
-#          BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
+      - name: Download Presigned URLs Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: presigned-urls
+          path: presigned-urls
 
+      - name: Read APK App and Keystore URLs
+        run: |
+          apk_app_url=$(cat presigned-urls/apk_app.txt)
+          echo "APK_APP=$apk_app_url" >> $GITHUB_OUTPUT
+        id: urls
 
+      - name: Set random options
+        id: random-options
+        run: |
+          if [[ $((RANDOM % 2)) == 1 ]]; then
+            second_output=true
+          else
+            second_output=false
+          fi
+          if [[ $((RANDOM % 2)) == 1 ]]; then
+            build_with_logs=true
+          else
+            build_with_logs=false
+          fi
+          if [[ $((RANDOM % 2)) == 1 ]]; then
+            google_play_signing=true
+          else
+            google_play_signing=false
+          fi
+          build_to_test_options=("bitbar" "browserstack" "lambdatest" "saucelabs" "None")
+          build_to_test_index=$((RANDOM % ${#build_to_test_options[@]}))
+          output_name_options=("None" "test_app" "test_dir/test_app" "test_dir/test_app.aab" "test_app.apk")
+          output_name_index=$((RANDOM % ${#build_to_test_options[@]}))
+
+          echo "SECOND_OUTPUT=${second_output}" >> $GITHUB_OUTPUT
+          echo "BUILD_WITH_LOGS=${build_with_logs}" >> $GITHUB_OUTPUT
+          echo "OUTPUT_APP_NAME=${output_name_options[$output_name_index]}" >> $GITHUB_OUTPUT
+          echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
+          echo "GOOGLE-PLAY-SIGNING=${google_play_signing}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Run the Appdome plugin
+        uses: Appdome/github_build-2secure@latest
+        with:
+          APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
+          SIGN_OPTIONS: "PRIVATE_SIGNING"
+          APP_FILE: ${{ steps.urls.outputs.APK_APP }}
+          FUSION_SET_ID: ${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}
+          SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
+          GOOGLE-PLAY-SIGNING: ${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}
+          SECOND_OUTPUT: ${{ steps.random-options.outputs.SECOND_OUTPUT }}
+          BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
+          OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
+          BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
+
+  APK_AUTO_DEV_SIGNING:
+    needs: APK_PRIVATE_SIGNING
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Presigned URLs Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: presigned-urls
+          path: presigned-urls
+
+      - name: Read APK App and Keystore URLs
+        run: |
+          apk_app_url=$(cat presigned-urls/apk_app.txt)
+          echo "APK_APP=$apk_app_url" >> $GITHUB_OUTPUT
+        id: urls
+
+      - name: Set random options
+        id: random-options
+        run: |
+          if [[ $((RANDOM % 2)) == 1 ]]; then
+            build_with_logs=true
+          else
+            build_with_logs=false
+          fi
+          if [[ $((RANDOM % 2)) == 1 ]]; then
+            google_play_signing=true
+          else
+            google_play_signing=false
+          fi
+          build_to_test_options=("bitbar" "browserstack" "lambdatest" "saucelabs" "None")
+          build_to_test_index=$((RANDOM % ${#build_to_test_options[@]}))
+          output_name_options=("None" "test_app" "test_dir/test_app" "test_dir/test_app.aab" "test_app.apk")
+          output_name_index=$((RANDOM % ${#build_to_test_options[@]}))
+
+          echo "BUILD_WITH_LOGS=${build_with_logs}" >> $GITHUB_OUTPUT
+          echo "OUTPUT_APP_NAME=${output_name_options[$output_name_index]}" >> $GITHUB_OUTPUT
+          echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
+          echo "GOOGLE-PLAY-SIGNING=${google_play_signing}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Run the Appdome plugin
+        uses: Appdome/github_build-2secure@latest
+        with:
+          APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
+          SIGN_OPTIONS: "AUTO_DEV_SIGNING"
+          APP_FILE: ${{ steps.urls.outputs.APK_APP }}
+          FUSION_SET_ID: ${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}
+          SIGN_FINGERPRINT: ${{secrets.APPDOME_SIGN_FINGERPRINT}}
+          GOOGLE-PLAY-SIGNING: ${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}
+          BUILD_WITH_LOGS: ${{ steps.random-options.outputs.BUILD_WITH_LOGS }}
+          OUTPUT_APP_NAME: ${{ steps.random-options.outputs.OUTPUT_APP_NAME }}
+          BUILD_TO_TEST: ${{ steps.random-options.outputs.BUILD_TO_TEST }}
