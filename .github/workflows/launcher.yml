@@ -2,6 +2,7 @@ on:
   release:
     types:
       - prereleased
+  workflow_dispatch:
 
 jobs:
   launch:
