@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  launch:
+  perpare:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -15,8 +15,11 @@ jobs:
       run: |
         sed -i "s/RELEASE_TAG_PLACEHOLDER/${{  github.ref_name }}/g" .github/workflows/pipeline.yml
         cat .github/workflows/pipeline.yml
-
-    - name: Trigger pipeline.yml workflow
-      run: gh workflow run .github/workflows/pipeline.yml -R $GITHUB_REPOSITORY
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  launch:
+    needs: prepare
+    uses: ".github/workflows/pipeline.yml"
+    secrets: inherit
+#    - name: Trigger pipeline.yml workflow
+#      run: gh workflow run .github/workflows/pipeline.yml -R $GITHUB_REPOSITORY
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
