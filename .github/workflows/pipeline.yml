@@ -6,8 +6,17 @@ on:
       - prereleased
 
 jobs:
+  get_release_tag:
+    runs-on: "ubuntu-latest"
+    steps:
+      - id: get_tag
+        env:
+          TAG_NAME: ${{ needs.get_tag.outputs.TAG_NAME }}
+        run: echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
   Presign_URLs:
     runs-on: "ubuntu-latest"
+    needs: get_release_tag
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -74,9 +83,12 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
           echo "GOOGLE-PLAY-SIGNING=${google_play_signing}" >> $GITHUB_OUTPUT
         shell: bash
+      - name: Echo Release Tag
+        run: |
+          echo "Release Tag: ${{ env.TAG_NAME }}"
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -136,7 +148,7 @@ jobs:
         id: urls
       - name: Echo Release Tag
         run: |
-          echo "Release Tag: ${{ github.event.release.tag_name }}"
+          echo "Release Tag: ${{ env.TAG_NAME }}"
 
       - name: Set random options
         id: random-options
@@ -163,7 +175,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -241,7 +253,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
@@ -327,7 +339,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -427,7 +439,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -516,7 +528,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
@@ -592,7 +604,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -667,7 +679,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -740,7 +752,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ github.event.release.tag_name }}
+        uses: Appdome/github_build-2secure@${{ env.TAG_NAME }}
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
