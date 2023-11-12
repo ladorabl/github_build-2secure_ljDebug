@@ -76,10 +76,10 @@ jobs:
         shell: bash
       - name: Echo Release Tag
         run: |
-          echo "Release Tag: ${{  github.ref_name }}"
+          echo "Release Tag: $GITHUB_REF_NAME"
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -139,7 +139,7 @@ jobs:
         id: urls
       - name: Echo Release Tag
         run: |
-          echo "Release Tag: ${{  github.ref_name }}"
+          echo "Release Tag: $GITHUB_REF_NAME"
 
       - name: Set random options
         id: random-options
@@ -166,7 +166,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -244,7 +244,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
@@ -330,7 +330,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -430,7 +430,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -519,7 +519,7 @@ jobs:
         shell: bash
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
@@ -595,7 +595,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
@@ -670,7 +670,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "PRIVATE_SIGNING"
@@ -743,7 +743,7 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{  github.ref_name }}
+        uses: Appdome/github_build-2secure@$GITHUB_REF_NAME
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "AUTO_DEV_SIGNING"
