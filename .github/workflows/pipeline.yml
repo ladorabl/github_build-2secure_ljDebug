@@ -1,9 +1,10 @@
 name: Appdome Build-2secure - Latest Flow
 
 on:
-  release:
+  workflow_run:
+    workflows: ["Launcher Workflow"]
     types:
-      - prereleased
+      - completed
 
 jobs:
   Presign_URLs:
@@ -36,13 +37,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Download Presigned URLs Artifact
         uses: actions/download-artifact@v3
         with:
           name: presigned-urls
           path: presigned-urls
-
       - name: Read APK App and Keystore URLs
         run: |
           apk_app_url=$(cat presigned-urls/apk_app.txt)
@@ -50,7 +49,6 @@ jobs:
           echo "APK_APP=$apk_app_url" >> $GITHUB_OUTPUT
           echo "KEYSTORE_FILE=$keystore_file_url" >> $GITHUB_OUTPUT
         id: urls
-
       - name: Set random options
         id: random-options
         run: |
@@ -76,11 +74,10 @@ jobs:
         shell: bash
       - name: Echo Release Tag
         run: |
-          echo "Release Tag: ${{  github.ref_name }}"
-          echo RELEASE_TAG=${{  github.ref_name }}
+          echo "Release Tag: RELEASE_TAG_PLACEHOLDER"
 
       - name: Run the Appdome plugin
-        uses: Appdome/github_build-2secure@${{ env.RELEASE_TAG }}
+        uses: Appdome/github_build-2secure@RELEASE_TAG_PLACEHOLDER
         with:
           APPDOME_API_TOKEN: ${{secrets.APPDOME_API_KEY}}
           SIGN_OPTIONS: "SIGN_ON_APPDOME"
