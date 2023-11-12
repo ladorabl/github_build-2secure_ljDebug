@@ -16,6 +16,6 @@ jobs:
         cat .github/workflows/pipeline.yml
 
     - name: Trigger pipeline.yml workflow
-      run: gh workflow run .github/workflows/pipeline.yml -R $GITHUB_REPOSITORY"
+      run: gh workflow run .github/workflows/pipeline.yml -R $GITHUB_REPOSITORY
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
