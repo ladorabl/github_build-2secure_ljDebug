@@ -1,10 +1,7 @@
 name: Appdome Build-2secure - Latest Flow
 
 on:
-  workflow_run:
-    workflows: ["Launcher Workflow"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   Presign_URLs:
