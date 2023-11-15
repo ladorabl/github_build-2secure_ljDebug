@@ -93,13 +93,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_1
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_1" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_1
           else
             echo "Error: Artifact not found"
             exit 1
@@ -165,13 +165,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_2
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_2" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_2
           else
             echo "Error: Artifact not found"
             exit 1
@@ -236,13 +236,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_3
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_3" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_3
           else
             echo "Error: Artifact not found"
             exit 1
@@ -325,13 +325,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_4
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_4" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_4
           else
             echo "Error: Artifact not found"
             exit 1
@@ -413,13 +413,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_5
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_5" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_5
           else
             echo "Error: Artifact not found"
             exit 1
@@ -484,13 +484,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_6
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_6" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_6
           else
             echo "Error: Artifact not found"
             exit 1
@@ -554,13 +554,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_7
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_7" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_7
           else
             echo "Error: Artifact not found"
             exit 1
@@ -622,13 +622,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_8
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_8" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_8
           else
             echo "Error: Artifact not found"
             exit 1
@@ -690,13 +690,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_9
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_9" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_9
           else
             echo "Error: Artifact not found"
             exit 1
@@ -763,13 +763,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_10
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_10" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_10
           else
             echo "Error: Artifact not found"
             exit 1
@@ -834,13 +834,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_11
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_11" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_11
           else
             echo "Error: Artifact not found"
             exit 1
@@ -905,13 +905,13 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: workflow-artifacts
-          path: ${{ github.workspace }}/downloaded-artifact
+          name: ${{ github.job }}_${{ github.run_number }}_Appdome_Outputs
+          path: ${{ github.workspace }}/downloaded_artifact_12
       - name: Check Artifact
         run: |
-          if [ -d "${{ github.workspace }}/downloaded-artifact" ]; then
+          if [ -d "${{ github.workspace }}/downloaded_artifact_12" ]; then
             echo "Artifact exists"
-            ls ${{ github.workspace }}/downloaded-artifact
+            ls ${{ github.workspace }}/downloaded_artifact_12
           else
             echo "Error: Artifact not found"
             exit 1
