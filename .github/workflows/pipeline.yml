@@ -1,9 +1,10 @@
 name: Appdome Build-2secure - Latest Flow
 
 on:
-  release:
-    types:
-      - prereleased
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
   workflow_dispatch:
 
 jobs:
@@ -72,14 +73,11 @@ jobs:
           echo "BUILD_TO_TEST=${build_to_test_options[$build_to_test_index]}" >> $GITHUB_OUTPUT
           echo "GOOGLE-PLAY-SIGNING=${google_play_signing}" >> $GITHUB_OUTPUT
         shell: bash
-      - name: Echo Release Tag
-        run: |
-          echo "Release Tag: RELEASE_TAG_PLACEHOLDER"
 
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "SIGN_ON_APPDOME", "APP_FILE": "${{ steps.urls.outputs.APK_APP }}", "KEYSTORE_FILE": "${{ steps.urls.outputs.KEYSTORE_FILE }}", "KEYSTORE_PASSWORD": "${{secrets.APPDOME_KEYSTORE_PASSWORD}}", "KEYSTORE_ALIAS": "${{secrets.APPDOME_KEYSTORE_ALIAS}}", "KEYSTORE_KEY_PASSWORD": "${{secrets.APPDOME_KEYSTORE_KEY_PASSWORD}}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE_PLAY_SIGNING": "${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -151,7 +149,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "PRIVATE_SIGNING", "APP_FILE": "${{ steps.urls.outputs.APK_APP }}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE_PLAY_SIGNING": "${{ steps.random-options.outputs.GOOGLE_PLAY_SIGNING }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -222,7 +220,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "AUTO_DEV_SIGNING", "APP_FILE": "${{ steps.urls.outputs.APK_APP }}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE-PLAY-SIGNING": "${{ steps.random-options.outputs.GOOGLE_PLAY_SIGNING }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -301,7 +299,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "SIGN_ON_APPDOME", "APP_FILE": "${{ steps.urls.outputs.AAB_APP }}", "KEYSTORE_FILE": "${{ steps.urls.outputs.KEYSTORE_FILE }}", "KEYSTORE_PASSWORD": "${{secrets.APPDOME_KEYSTORE_PASSWORD}}", "KEYSTORE_ALIAS": "${{secrets.APPDOME_KEYSTORE_ALIAS}}", "KEYSTORE_KEY_PASSWORD": "${{secrets.APPDOME_KEYSTORE_KEY_PASSWORD}}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE_PLAY_SIGNING": "${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}", "SECOND_OUTPUT": "${{ steps.random-options.outputs.SECOND_OUTPUT }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -389,7 +387,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "PRIVATE_SIGNING", "APP_FILE": "${{ steps.urls.outputs.AAB_APP }}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE_PLAY_SIGNING": "${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}", "SECOND_OUTPUT": "${{ steps.random-options.outputs.SECOND_OUTPUT }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -470,7 +468,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "AUTO_DEV_SIGNING", "APP_FILE": "${{ steps.urls.outputs.AAB_APP }}", "FUSION_SET_ID": "${{secrets.APPDOME_ANDROID_FUSION_SET_ID}}", "SIGN_FINGERPRINT": "${{secrets.APPDOME_SIGN_FINGERPRINT}}", "GOOGLE_PLAY_SIGNING": "${{ steps.random-options.outputs.GOOGLE-PLAY-SIGNING }}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -540,7 +538,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "SIGN_ON_APPDOME", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "CERTIFICATE_FILE": "${{ steps.urls.outputs.CERTIFICATE_FILE }}", "CERTIFICATE_PASSWORD": "${{secrets.APPDOME_CERTIFICATE_1_PASSWORD}}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -608,7 +606,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "PRIVATE_SIGNING", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -676,7 +674,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "AUTO_DEV_SIGNING", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -749,7 +747,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "SIGN_ON_APPDOME", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "CERTIFICATE_FILE": "${{ steps.urls.outputs.CERTIFICATE_FILE }}", "CERTIFICATE_PASSWORD": "${{secrets.APPDOME_CERTIFICATE_2_PASSWORD}}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_1 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_2 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_3 }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE_1 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_2 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_3 }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -820,7 +818,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "PRIVATE_SIGNING", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_1 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_2 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_3 }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE_1 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_2 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_3 }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
@@ -891,7 +889,7 @@ jobs:
       - name: Run the Appdome plugin
         uses: jenseng/dynamic-uses@v1
         with:
-          uses: Appdome/github_build-2secure@${{ github.ref_name }}
+          uses: Appdome/github_build-2secure@${{ github.event.pull_request.title }}
           with: '{ "APPDOME_API_TOKEN": "${{secrets.APPDOME_API_KEY}}", "TEAM_ID": "${{secrets.APPDOME_TEAM_ID}}", "SIGN_OPTIONS": "AUTO_DEV_SIGNING", "APP_FILE": "${{ steps.urls.outputs.IPA_APP }}", "MOBILE_PROVISION_PROFILE_FILE": "${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_1 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_2 }},${{ steps.urls.outputs.MOBILE_PROVISIONING_FILE_3 }}", "ENTITLEMENTS_FILE": "${{ steps.urls.outputs.ENTITLEMENTS_FILE_1 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_2 }},${{ steps.urls.outputs.ENTITLEMENTS_FILE_3 }}", "FUSION_SET_ID": "${{secrets.APPDOME_IOS_FUSION_SET_ID}}", "BUILD_WITH_LOGS": "${{ steps.random-options.outputs.BUILD_WITH_LOGS }}", "OUTPUT_APP_NAME": "${{ steps.random-options.outputs.OUTPUT_APP_NAME }}", "BUILD_TO_TEST": "${{ steps.random-options.outputs.BUILD_TO_TEST }}" }'
 
       - name: Test Environment Variables
