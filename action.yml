@@ -110,9 +110,9 @@ runs:
       id: convention-fix
       run: |
         if [ -n "${{ inputs.GOOGLE_PLAY_SIGNING }}" ]; then
-          GOOGLE_PLAY_SIGNING="${{ inputs.GOOGLE_PLAY_SIGNING }}"
-        else
           GOOGLE_PLAY_SIGNING="${{ inputs.GOOGLE-PLAY-SIGNING }}"
+        else
+          GOOGLE_PLAY_SIGNING="${{ inputs.GOOGLE_PLAY_SIGNING }}"
         fi
 
         if [ "${{ inputs.TEAM_ID }}" == "None" ]; then
